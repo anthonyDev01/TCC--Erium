@@ -1,0 +1,199 @@
+/*-----------Estilização da pagina de login-----------*/
+
+.pageLoginCadastro {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #b7d5e5;
+}
+
+.containerLoginCadastro {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  width: 70%;
+  min-height: 550px;
+  position: relative;
+  overflow: hidden;
+}
+
+.formContainer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.formContainer form {
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  padding: 3.125rem;
+}
+
+.formContainer h1 {
+  margin-bottom: 2rem;
+}
+
+.loginFormGroup {
+  width: 100%;
+  margin-bottom: 1.1875rem;
+}
+
+.form-error {
+  color: #ff0b0b;
+  font-size: 12px;
+}
+
+.formContainer input {
+  padding: 8px 15px;
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 10px;
+
+  width: 100%;
+}
+
+.buttonLoginCadastro {
+  background-color: #4275fa;
+  border: none;
+  padding: 14px 5rem;
+  border-radius: 10px;
+  color: #fff;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.error{
+  color: red;
+  margin-bottom: 0.5rem;
+}
+
+.loginContainer {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.containerLoginCadastro.rightPanelActive .loginContainer {
+  transform: translateX(100%);
+}
+
+.cadastroContainer {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.containerLoginCadastro.rightPanelActive .cadastroContainer {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+}
+
+@keyframes show {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.overlayContainer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.containerLoginCadastro.rightPanelActive .overlayContainer {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background-image: url(assets/images/nuvensGif.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.containerLoginCadastro.rightPanelActive .overlay {
+  transform: translateX(50%);
+}
+
+.overlayPanel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 40px;
+  top: 0;
+  height: 74%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlayPanel h1,
+p {
+  margin-bottom: 2rem;
+}
+
+.overlayPanel p {
+  font-weight: bold;
+  max-width: 336px;
+  font-size: 20px;
+}
+
+.overlayEsquerda {
+  transform: translateX(-20%);
+}
+
+.containerLoginCadastro.rightPanelActive .overlayEsquerda {
+  transform: translateX(0);
+}
+
+.overlayDireita {
+  right: 0;
+  transform: translateX(0);
+}
+
+.containerLoginCadastro.rightPanelActive .overlayDireita {
+  transform: translateX(20%);
+}
