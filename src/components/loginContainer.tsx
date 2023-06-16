@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { ButtonLoginCadastro } from "./buttonLoginCadastro";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
 
 export function LoginContainer() {
+  const [message, setMessage] = useState<string>("");
+  const [inputFocused, setInputFocused] = useState<boolean>(false);
   interface FormValues {
     email: string;
     senha: string;
@@ -14,15 +17,38 @@ export function LoginContainer() {
     senha: "",
   };
 
-  const handleClickLogin = (values: FormValues) => {
-    Axios.post("http://localhost:5000/login", {
+  const handleClickLogin = (
+    values: FormValues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    Axios.post("https://erium-api.vercel.app/cadastro", {
       email: values.email,
       password: values.senha,
     }).then((response) => {
-      console.log(response);
+      const msg = response.data.msg;
+      if (
+        msg === "Email já cadastrado" ||
+        msg === "Senha incorreta" ||
+        msg === "Email ou senha incorretos"
+      ) {
+        setMessage(msg); // Atualize o estado com a mensagem do back-end
+      }
+      if (
+        msg == "Cadastrado(a) com sucesso" ||
+        msg === "Usuário logado com sucesso"
+      ) {
+        alert(msg);
+        resetForm();
+      } else {
+        resetForm(); // Limpe os campos do formulário
+      }
     });
   };
 
+  const handleInputFocus = () => {
+    setMessage("");
+    setInputFocused(!inputFocused);
+  };
   const validationLogin = yup.object().shape({
     email: yup
       .string()
@@ -44,7 +70,11 @@ export function LoginContainer() {
         <Form>
           <h1>Faça Login aqui</h1>
           <div className="loginFormGroup">
-            <Field name="email" placeholder="Email:" />
+            <Field
+              name="email"
+              placeholder="Email:"
+              onFocus={handleInputFocus}
+            />
             <ErrorMessage
               component="span"
               name="email"
@@ -52,7 +82,12 @@ export function LoginContainer() {
             />
           </div>
           <div className="loginFormGroup">
-            <Field name="senha" placeholder="Senha:" maxLength="16" />
+            <Field
+              name="senha"
+              placeholder="Senha:"
+              maxLength="16"
+              onFocus={handleInputFocus}
+            />
             <ErrorMessage
               component="span"
               name="senha"
@@ -60,6 +95,10 @@ export function LoginContainer() {
             />
           </div>
           <ButtonLoginCadastro typeButton="submit" title="Logar" />
+
+          {/* Exiba apenas as mensagens específicas no <span> vazio quando o input não estiver focado */}
+          {!inputFocused && message && <span className="error">{message}</span>}
+
           <span>Ou use sua conta</span>
         </Form>
       </Formik>

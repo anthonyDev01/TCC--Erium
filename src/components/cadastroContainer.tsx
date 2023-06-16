@@ -7,8 +7,6 @@ import Axios from "axios";
 export function CadastroContainer() {
   const [message, setMessage] = useState<string>("");
   const [inputFocused, setInputFocused] = useState<boolean>(false);
- 
-  
 
   interface FormValues {
     nome: string;
@@ -24,8 +22,11 @@ export function CadastroContainer() {
     confirmarSenha: "",
   };
 
-  const handleClickRegister = (values: FormValues) => {
-    Axios.post("http://localhost:5000/cadastro", {
+  const handleClickRegister = (
+    values: FormValues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    Axios.post("https://erium-api.vercel.app/cadastro", {
       name: values.nome,
       email: values.email,
       password: values.senha,
@@ -38,6 +39,15 @@ export function CadastroContainer() {
       ) {
         setMessage(msg); // Atualize o estado com a mensagem do back-end
       }
+      if (
+        msg == "Cadastrado(a) com sucesso" ||
+        msg === "Usuário logado com sucesso"
+      ) {
+        alert(msg);
+        resetForm();
+      } else {
+        resetForm(); // Limpe os campos do formulário
+      }
     });
   };
 
@@ -47,20 +57,20 @@ export function CadastroContainer() {
   };
 
   const validationRegister = yup.object().shape({
-    nome: yup.string().required("Este campo é obrigatorio"),
+    nome: yup.string().required("Este campo é obrigatório"),
     email: yup
       .string()
-      .email("Não é um Email")
-      .required("Este campo é obrigatorio"),
+      .email("Não é um email válido")
+      .required("Este campo é obrigatório"),
     senha: yup
       .string()
-      .min(8, "O minimo de caracteres é 8")
+      .min(8, "O mínimo de caracteres é 8")
       .max(16)
-      .required("Este campo é obrigatorio"),
+      .required("Este campo é obrigatório"),
     confirmarSenha: yup
       .string()
       .oneOf([yup.ref("senha")], "As senhas não são iguais")
-      .required("Este campo é obrigatorio"),
+      .required("Este campo é obrigatório"),
   });
 
   return (
@@ -68,7 +78,6 @@ export function CadastroContainer() {
       <Formik
         initialValues={initialValues}
         onSubmit={handleClickRegister}
-        className="formContainer cadastroContainer"
         validationSchema={validationRegister}
       >
         <Form>
@@ -119,10 +128,7 @@ export function CadastroContainer() {
           <ButtonLoginCadastro typeButton="submit" title="Registrar" />
 
           {/* Exiba apenas as mensagens específicas no <span> vazio quando o input não estiver focado */}
-          {!inputFocused && message && (
-            <span className="error">{message}</span>
-          )}
-
+          {!inputFocused && message && <span className="error">{message}</span>}
 
           <span>Ou use sua conta</span>
         </Form>
