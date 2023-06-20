@@ -1,0 +1,31 @@
+.bagagem {
+  border-right: 4px solid #fff;
+  height: 90vh;
+  width: 36.9%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.bagagem img{
+    width: 70%;
+}
+
+.ContainerConteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin: 4rem 0;
+
+  font-weight: bold;
+}
+
+.ContainerConteudo p {
+  color: #000;
+}
+
+.peso {
+  color: #3b7600;
+}

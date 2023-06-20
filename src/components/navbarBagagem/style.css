@@ -1,0 +1,35 @@
+.navbarBagagem {
+  
+  height: 10vh;
+
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #212529;
+}
+
+.navMala {
+  border-right: 4px solid #fff;
+  width: 36.9%;
+  height: 100%;
+}
+
+.navMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 63.91%;
+  padding: 0 1.25rem;
+}
+
+.navMenu img {
+  max-width: 40px;
+}
+
+.navMenu input {
+  width: 30%;
+  padding: 0.3125rem;
+  border-radius: 0.3125rem;
+  border: none;
+}

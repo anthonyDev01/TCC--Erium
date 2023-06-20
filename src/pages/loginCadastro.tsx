@@ -1,3 +1,5 @@
+import "../App.css";
+
 import { useState } from "react";
 import { CadastroContainer } from "../components/cadastroContainer";
 import { LoginContainer } from "../components/loginContainer";
