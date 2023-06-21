@@ -1,4 +1,19 @@
-.menuBagagem{
-    width: 63.91%;
-    
+.menuBagagem {
+  margin-top: 5rem;
+  width: 63.91%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-left: 3rem;
+  
+}
+
+.card {
+  width: 104px;
+  height: 108px;
+  background-color: #f9f9f9;
+  margin-right: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 10px;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
 }
