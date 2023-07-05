@@ -7,6 +7,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import Axios from "axios";
 import { LoginCadastro } from "./pages/loginCadastro";
 import { Home } from "./pages/home";
 import { BagagemVirtual } from "./pages/bagagemVirtual/bagagemVirtual";
@@ -24,6 +25,31 @@ function AuthChecker() {
   const isAuthenticated = !!localStorage.getItem("token");
   const location = useLocation();
   const navigate = useNavigate();
+
+  const validateToken = () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      Axios.get("http://localhost:5000/pagina-protegida", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          // O token é válido, o usuário está autenticado
+          console.log(response.data);
+        })
+        .catch(() => {
+          // Ocorreu um erro ou o token é inválido, volta para pagina de login
+          navigate("/login", { replace: true });
+        });
+    } else {
+      // Token não encontrado no localStorage
+      console.log("Token não encontrado");
+    }
+  };
+
+  validateToken();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -43,7 +69,7 @@ function AuthChecker() {
       {isAuthenticated && (
         <Route path="/bagagem-virtual" element={<BagagemVirtual />} />
       )}
-      <Route path="" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

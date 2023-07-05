@@ -42,6 +42,7 @@ export function LoginContainer() {
       ) {
         const token = response.data.token;
         localStorage.setItem("token", token); // Armazene o token no localStorage
+
         navigate("/", { replace: true }); // Redireciona para a página inicial
         resetForm();
       } else {

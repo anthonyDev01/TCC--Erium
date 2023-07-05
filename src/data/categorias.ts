@@ -11,7 +11,6 @@ const categorias = [
           imagem: ""
         },
         blusa: {
-          nome: "Blusa",
           imagem: ""
         },
         bermuda: {
