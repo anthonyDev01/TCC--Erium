@@ -4,6 +4,7 @@ const categorias = [
         calca: {
           nome: "Calça",
           imagem: ""
+          
         },
         meias: {
           nome: "Meias",

@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { ButtonLoginCadastro } from "./buttonLoginCadastro";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Axios from "axios";
 
 export function LoginContainer() {
+  const navigate = useNavigate();
   const [message, setMessage] = useState<string>("");
   const [inputFocused, setInputFocused] = useState<boolean>(false);
+
   interface FormValues {
     email: string;
     senha: string;
@@ -21,7 +24,7 @@ export function LoginContainer() {
     values: FormValues,
     { resetForm }: { resetForm: () => void }
   ) => {
-    Axios.post("https://erium-api.vercel.app/cadastro", {
+    Axios.post("http://localhost:5000/login", {
       email: values.email,
       password: values.senha,
     }).then((response) => {
@@ -37,7 +40,9 @@ export function LoginContainer() {
         msg == "Cadastrado(a) com sucesso" ||
         msg === "Usuário logado com sucesso"
       ) {
-        alert(msg);
+        const token = response.data.token;
+        localStorage.setItem("token", token); // Armazene o token no localStorage
+        navigate("/", { replace: true }); // Redireciona para a página inicial
         resetForm();
       } else {
         resetForm(); // Limpe os campos do formulário
@@ -49,6 +54,7 @@ export function LoginContainer() {
     setMessage("");
     setInputFocused(!inputFocused);
   };
+
   const validationLogin = yup.object().shape({
     email: yup
       .string()

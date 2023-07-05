@@ -26,7 +26,7 @@ export function CadastroContainer() {
     values: FormValues,
     { resetForm }: { resetForm: () => void }
   ) => {
-    Axios.post("https://erium-api.vercel.app/cadastro", {
+    Axios.post("http://localhost:5000/cadastro", {
       name: values.nome,
       email: values.email,
       password: values.senha,
@@ -40,7 +40,7 @@ export function CadastroContainer() {
         setMessage(msg); // Atualize o estado com a mensagem do back-end
       }
       if (
-        msg == "Cadastrado(a) com sucesso" ||
+        msg === "Cadastrado(a) com sucesso" ||
         msg === "Usuário logado com sucesso"
       ) {
         alert(msg);
