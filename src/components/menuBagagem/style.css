@@ -67,45 +67,85 @@
 }
 
 .inputContainer {
-  width: 150px;
+  width: 35%;
   height: 150px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 }
 
 .inputContainer input {
-  width: 143px;
+  width: 100%;
   margin-bottom: 0.6rem;
   padding: 4px;
 }
 
-.btnAdicionar{
+.inputContainer h2{
+  margin-right: 40%;
+}
+
+.subInputContainer {
+  padding: 0 19px;
+  width: 80%;
+}
+
+.btnAdicionar {
   padding: 8px;
+
+  width: 70%;
 
   background-color: #7d9ff6;
   border: none;
   border-radius: 10px;
 }
 
-.SubInputContainer {
-}
-
-.typeContainer{
+.typeContainer {
   display: flex;
+  width: 100%;
+  margin: 0 3px;
 }
 
-.typeContainer button{
-  padding: 0.5rem;
+.tipo {
+  display: flex;
+  width: 80%;
+}
+.right {
+  background-color: transparent;
+  border: none;
+}
+
+.left {
+  background-color: transparent;
+  border: none;
+}
+
+.left img {
+  width: 15px;
+}
+
+.right img {
+  width: 15px;
+}
+
+.typeContainer button {
+  background-color: transparent;
+  border: none;
+}
+
+.typeContainer button img {
+  width: 15px;
 }
 
 .types {
-  width: 143px;
+  width: 100%;
   padding: 4px;
- 
+
   border: 1px solid black;
   background-color: white;
+  font-size: clamp(0.3rem, 2.5vw, 0.74rem);
+  font-weight: bold;
 }
 
 .buttonContainer {
@@ -117,6 +157,7 @@
 .infoProduto span {
   position: absolute;
   right: 1.4rem;
-  bottom: 2.8rem;
+  bottom: 3.3rem;
   font-weight: bold;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
 }

@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 
 const pathImage = "http://localhost:5000/imagens/"; //caminho das imagens
+import setaDireita from "../../assets/images/icons/seta-direita.png";
+import setaEsquerda from "../../assets/images/icons/seta-esquerda.png";
 
 export function MenuBagagem() {
   const [data, setData] = useState<Array<any>>([]); //estado para armazenar o array inteiro de categorias
+  const [filter, setFilter] = useState();
   const [selectedProduct, setSelectedProduct] = useState<any>({
     //estado onde vai ser armazenado o item clicado
     nome: "",
@@ -94,7 +97,7 @@ export function MenuBagagem() {
           <div className="inputContainer">
             <h2>{selectedProduct.nome}</h2>
 
-            <div className="SubInputContainer">
+            <div className="subInputContainer">
               <input
                 type="number"
                 value={amount}
@@ -104,16 +107,22 @@ export function MenuBagagem() {
                   setAmount(newValue);
                 }}
               />
-              {selectedProduct.tipos && ( // se o item selecionado tiver tipos mostro os tipos na tela
+            </div>
+            {selectedProduct.tipos && ( // se o item selecionado tiver tipos mostro os tipos na tela
+              <div className="tipo">
+                <button className="right" onClick={() => handleType("remove")}>
+                  <img src={setaEsquerda}></img>
+                </button>
                 <div className="typeContainer">
-                  <button onClick={() => handleType("remove")}></button>
                   <div className="types">
                     {selectedProduct.tipos[index].nome}
                   </div>
-                  <button onClick={() => handleType("add")}></button>
                 </div>
-              )}
-            </div>
+                <button className="left" onClick={() => handleType("add")}>
+                  <img src={setaDireita}></img>
+                </button>
+              </div>
+            )}
             <button className="btnAdicionar">Adicionar</button>
           </div>
           <span>Peso: {calculateWeight(amount)}</span>
