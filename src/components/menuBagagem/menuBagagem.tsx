@@ -1,14 +1,27 @@
 import "./style.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 
 const pathImage = "http://localhost:5000/imagens/"; //caminho das imagens
 import setaDireita from "../../assets/images/icons/seta-direita.png";
 import setaEsquerda from "../../assets/images/icons/seta-esquerda.png";
+import { searchContext } from "../../context/searchContext";
+import { categoryContext } from "../../context/categoryContext";
+
+interface Roupa {
+  nome: string;
+  imagem: string;
+  peso: number;
+  tipos?: Array<Tipo>; // Se tipos for opcional
+}
+
+interface Tipo {
+  nome: string;
+  peso: number;
+}
 
 export function MenuBagagem() {
   const [data, setData] = useState<Array<any>>([]); //estado para armazenar o array inteiro de categorias
-  const [filter, setFilter] = useState();
   const [selectedProduct, setSelectedProduct] = useState<any>({
     //estado onde vai ser armazenado o item clicado
     nome: "",
@@ -19,6 +32,8 @@ export function MenuBagagem() {
 
   const [amount, setAmount] = useState<number>(0); //estado para armazenar a quantidade de itens selecionados
   const [index, setIndex] = useState<number>(0); //estado para armazenar o index do array de tipos dos itens
+  const search = useContext(searchContext);
+  const category = useContext(categoryContext);
 
   useEffect(() => {
     //bucando o array de categorias do servidor
@@ -42,6 +57,15 @@ export function MenuBagagem() {
 
     fetchData();
   }, []);
+
+  const roupas = data.length > 0 ? data[0][category] : [];
+  const lowerSearch = search.toLowerCase();
+
+  
+
+  const filteredData = roupas.filter((roupa: Roupa) =>
+    roupa.nome.toLowerCase().includes(lowerSearch)
+  );
 
   //funcao para pegar os valores do item que foi clicado
   const handleCardClick = (item: any) => {
@@ -110,7 +134,7 @@ export function MenuBagagem() {
             </div>
             {selectedProduct.tipos && ( // se o item selecionado tiver tipos mostro os tipos na tela
               <div className="tipo">
-                <button className="right" onClick={() => handleType("remove")}>
+                <button className="arrow" onClick={() => handleType("remove")}>
                   <img src={setaEsquerda}></img>
                 </button>
                 <div className="typeContainer">
@@ -118,7 +142,7 @@ export function MenuBagagem() {
                     {selectedProduct.tipos[index].nome}
                   </div>
                 </div>
-                <button className="left" onClick={() => handleType("add")}>
+                <button className="arrow" onClick={() => handleType("add")}>
                   <img src={setaDireita}></img>
                 </button>
               </div>
@@ -131,7 +155,7 @@ export function MenuBagagem() {
 
       <div className="menuBagagem">
         {data.length > 0 ? ( //verificando se o array é vazio ou nao
-          data[0].roupas.map(
+          filteredData.map(
             (
               item: any // renderizando os itens do menu
             ) => (

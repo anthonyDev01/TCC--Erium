@@ -1,5 +1,4 @@
 .navbarBagagem {
-  
   height: 10vh;
 
   width: 100vw;
@@ -21,15 +20,37 @@
   justify-content: space-between;
   width: 63.91%;
   padding: 0 1.25rem;
+  height: 10vh;
 }
 
 .navMenu img {
   max-width: 40px;
+  cursor: pointer;
+}
+
+.navMenu div {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.3125rem;
+}
+
+.hideLupa {
+  display: none;
+}
+
+.navMenu div img {
+  width: 9%;
 }
 
 .navMenu input {
-  width: 30%;
   padding: 0.3125rem;
   border-radius: 0.3125rem;
   border: none;
 }
+
+.navMenu input:focus {
+  outline: none;
+}
+
