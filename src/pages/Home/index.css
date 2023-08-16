@@ -1,0 +1,48 @@
+.pageHome {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../../assets/images/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #b7d5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerHome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+.opcoesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 45%;
+  opacity: 0.9;
+}
+
+.cardOpcao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  background-color: #d5e6f0;
+  padding: 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cardOpcao img {
+  width: 70%;
+}
+
+.cardOpcao h2 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

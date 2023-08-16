@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Axios from "axios";
 import { LoginCadastro } from "./pages/loginCadastro";
-import { Home } from "./pages/home";
+import { Home } from "./pages/Home/home";
 import { BagagemVirtual } from "./pages/bagagemVirtual/bagagemVirtual";
 import { NotFound } from "./components/notFound/notFound";
 

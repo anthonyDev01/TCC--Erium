@@ -67,6 +67,11 @@ export function MenuBagagem() {
     roupa.nome.toLowerCase().includes(lowerSearch)
   );
 
+  
+  
+  
+ 
+
   //funcao para pegar os valores do item que foi clicado
   const handleCardClick = (item: any) => {
     setSelectedProduct(item);
@@ -110,6 +115,8 @@ export function MenuBagagem() {
       }
     }
   };
+
+
 
   return (
     <div className="menuContainer">
