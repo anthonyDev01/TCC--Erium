@@ -5,6 +5,7 @@ import Axios from "axios";
 const pathImage = "http://localhost:5000/imagens/"; //caminho das imagens
 import setaDireita from "../../assets/images/icons/seta-direita.png";
 import setaEsquerda from "../../assets/images/icons/seta-esquerda.png";
+import fechar from "../../assets/images/icons/botao-fechar.png";
 import { searchContext } from "../../context/searchContext";
 import { categoryContext } from "../../context/categoryContext";
 
@@ -20,18 +21,24 @@ interface Tipo {
   peso: number;
 }
 
-export function MenuBagagem() {
+interface NavbarBagagemProps {
+  setItem: React.Dispatch<React.SetStateAction<Object>>;
+}
+
+export function MenuBagagem(props: NavbarBagagemProps) {
   const [data, setData] = useState<Array<any>>([]); //estado para armazenar o array inteiro de categorias
+
+  const [amount, setAmount] = useState<number>(0); //estado para armazenar a quantidade de itens selecionados
+  const [index, setIndex] = useState<number>(0); //estado para armazenar o index do array de tipos dos itens
   const [selectedProduct, setSelectedProduct] = useState<any>({
     //estado onde vai ser armazenado o item clicado
     nome: "",
     imagem: "",
-    peso: "",
+    peso: 0,
     tipos: [],
   });
+  const [closeInfo, setCloseInfo] = useState<boolean>(false);
 
-  const [amount, setAmount] = useState<number>(0); //estado para armazenar a quantidade de itens selecionados
-  const [index, setIndex] = useState<number>(0); //estado para armazenar o index do array de tipos dos itens
   const search = useContext(searchContext);
   const category = useContext(categoryContext);
 
@@ -61,21 +68,15 @@ export function MenuBagagem() {
   const roupas = data.length > 0 ? data[0][category] : [];
   const lowerSearch = search.toLowerCase();
 
-  
-
   const filteredData = roupas.filter((roupa: Roupa) =>
     roupa.nome.toLowerCase().includes(lowerSearch)
   );
-
-  
-  
-  
- 
 
   //funcao para pegar os valores do item que foi clicado
   const handleCardClick = (item: any) => {
     setSelectedProduct(item);
     setAmount(0);
+    setCloseInfo(true)
   };
 
   //funcao responsavel por calcular o peso do dos itens
@@ -90,6 +91,7 @@ export function MenuBagagem() {
     if (weight >= 1000) {
       // verificando se o valor chegou em kilos ou esta em gramas
       const weightKg = (weight / 1000).toFixed(1);
+
       return `${weightKg} kg`;
     } else {
       const weightG = weight.toFixed(1);
@@ -118,9 +120,23 @@ export function MenuBagagem() {
 
 
 
+  const addItem = () => {
+    const type = selectedProduct.tipos;
+
+    const newItem = {
+      nome: type ? type[index].nome : selectedProduct.nome,
+      imagem: `${pathImage}${selectedProduct.imagem}`,
+      peso: type ? type[index].peso : selectedProduct.peso,
+      quantidade: amount,
+    };
+
+    props.setItem((prevState) => [...prevState, newItem]);
+    setCloseInfo(false)
+  };
+
   return (
     <div className="menuContainer">
-      {selectedProduct.nome != "" && (
+      {selectedProduct.nome !== "" && closeInfo && (
         <div className="infoProduto">
           <div className="imageContainer">
             <img src={`${pathImage}${selectedProduct.imagem}`} alt="" />
@@ -154,9 +170,14 @@ export function MenuBagagem() {
                 </button>
               </div>
             )}
-            <button className="btnAdicionar">Adicionar</button>
+            <button className="btnAdicionar" onClick={addItem}>
+              Adicionar
+            </button>
           </div>
           <span>Peso: {calculateWeight(amount)}</span>
+          <div className="close" onClick={() => setCloseInfo(false)}>
+            <img src={fechar} alt="" />
+          </div>
         </div>
       )}
 

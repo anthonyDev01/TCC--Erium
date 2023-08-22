@@ -1,10 +1,25 @@
 import "./style.css";
 import mala from "../../assets/images/mala.png";
+import { useContext, useState } from "react";
+import { Inventario } from "../inventario/inventario";
 
-export function Bagagem() {
+
+export function Bagagem({item}) {
+  const [inventoryClick, setInventoryClick] = useState<Boolean>(false);
+
+  
+  const handleClickInventory = () => {
+    setInventoryClick(!inventoryClick);
+    
+    
+  };
+
   return (
     <div className="bagagem">
-      <img src={mala} alt="" />
+      <img src={mala} alt="" onClick={handleClickInventory} />
+
+      {inventoryClick == true && <Inventario item={item} setInventoryClick={setInventoryClick}/>}
+
       <div className="ContainerConteudo">
         <p>
           Peso Aproximado: <span className="peso">16kg </span>
