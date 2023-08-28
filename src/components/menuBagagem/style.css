@@ -37,6 +37,12 @@
   font-size: clamp(11.5px, 4vw, 14px);
 }
 
+.card:hover {
+  transform: translate(4px, -4px);
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s;
+}
+
 .infoProduto {
   position: relative;
   width: 60%;
@@ -51,9 +57,38 @@
   margin-top: 2rem;
 
   box-shadow: 6px 8px 4px rgba(0, 0, 0, 0.4);
-  
 }
 
+.showInfoProduto {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+  transition: all 1s;
+}
+
+.showInfoProduto .imageContainer {
+  height: 9vw;
+  transition: all 1s;
+}
+
+.hiddenInfoProduto {
+  opacity: 0;
+  filter: blur(15px);
+  transform: translateY(-20%);
+  height: 0;
+  transition: all 1s;
+}
+
+.hiddenInfoProduto .imageContainer {
+  height: 0;
+  transition: all 1s;
+}
+
+.hiddenInfoProduto .inputContainer {
+  opacity: 0;
+  height: 0;
+  transition: all 0.8s;
+}
 
 .imageContainer {
   display: flex;
@@ -66,16 +101,15 @@
 
   min-width: 70px;
   min-height: 70px;
-  
+
   padding: 10px;
   border-radius: 10px;
   margin-right: 1.5rem;
 }
 
-.imageContainer img{
+.imageContainer img {
   width: 50%;
 }
-
 
 .inputContainer {
   width: 35%;
@@ -104,13 +138,24 @@
 }
 
 .btnAdicionar {
-  padding: 8px;
-
+  padding: 10px 0px;
+  margin-top: 10px;
   width: 70%;
-
   background-color: #7d9ff6;
   border: none;
+  cursor: pointer;
   border-radius: 10px;
+  font-size: clamp(0.6rem, 0.5rem + 1vw, 1.1rem);
+}
+
+.btnAdicionar:hover {
+  transform: translateY(-4px) translateX(-2px);
+  box-shadow: 2px 5px 0 0 rgba(0, 0, 0, 0.8);
+}
+
+.btnAdicionar:active {
+  transform: translateY(2px) translateX(1px);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.8);
 }
 
 .typeContainer {
@@ -158,8 +203,9 @@
   align-items: center;
 }
 
-.infoProduto span {
+.pesoInfo {
   position: absolute;
+  color: black;
   right: 1.4rem;
   bottom: 3.3rem;
   font-weight: bold;

@@ -19,8 +19,6 @@ export function InventoryCard({ item }) {
   console.log(item.peso);
   
 
-  const [calculatedWeight, setCalculatedWeight] = useState(item.peso);
-
   const increaseQuantity = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);

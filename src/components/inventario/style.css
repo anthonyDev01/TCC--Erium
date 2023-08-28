@@ -20,12 +20,28 @@
   overflow: auto;
 }
 
+.showInventory{
+  opacity: 1;
+  filter: blur(0);
+  transition: all 2s;
+}
+
+.hiddenInventory{
+  opacity: 0;
+  filter: blur(10px);
+  visibility: hidden;
+  transform: translateX(-200%);
+  transition: all 2s;
+}
+
 .inventioCards {
   display: flex;
   flex-wrap: wrap;
   height: 100px;
   
 }
+
+
 
 .closeInventory {
   position: absolute;

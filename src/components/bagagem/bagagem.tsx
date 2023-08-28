@@ -18,7 +18,7 @@ export function Bagagem({item}) {
     <div className="bagagem">
       <img src={mala} alt="" onClick={handleClickInventory} />
 
-      {inventoryClick == true && <Inventario item={item} setInventoryClick={setInventoryClick}/>}
+      <Inventario item={item} inventoryClick={inventoryClick} setInventoryClick={setInventoryClick}/>
 
       <div className="ContainerConteudo">
         <p>

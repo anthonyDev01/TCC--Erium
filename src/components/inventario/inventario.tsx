@@ -4,7 +4,7 @@ import fechar from "../../assets/images/icons/botao-fechar.png";
 
 export function Inventario(props) {
   return (
-    <div className="inventario">
+    <div className={props.inventoryClick ? "inventario showInventory" : "inventario hiddenInventory"}>
       <div className="inventioCards">
         {props.item.map((item) => (
           <InventoryCard item={item} key={item.nome} />

@@ -76,7 +76,7 @@ export function MenuBagagem(props: NavbarBagagemProps) {
   const handleCardClick = (item: any) => {
     setSelectedProduct(item);
     setAmount(0);
-    setCloseInfo(true)
+    setCloseInfo(true);
   };
 
   //funcao responsavel por calcular o peso do dos itens
@@ -118,8 +118,6 @@ export function MenuBagagem(props: NavbarBagagemProps) {
     }
   };
 
-
-
   const addItem = () => {
     const type = selectedProduct.tipos;
 
@@ -131,13 +129,19 @@ export function MenuBagagem(props: NavbarBagagemProps) {
     };
 
     props.setItem((prevState) => [...prevState, newItem]);
-    setCloseInfo(false)
+    setCloseInfo(false);
   };
 
   return (
     <div className="menuContainer">
-      {selectedProduct.nome !== "" && closeInfo && (
-        <div className="infoProduto">
+      {selectedProduct.nome !== "" && (
+        <div
+          className={
+            closeInfo
+              ? "infoProduto showInfoProduto"
+              : "infoProduto hiddenInfoProduto"
+          }
+        >
           <div className="imageContainer">
             <img src={`${pathImage}${selectedProduct.imagem}`} alt="" />
           </div>
@@ -174,7 +178,7 @@ export function MenuBagagem(props: NavbarBagagemProps) {
               Adicionar
             </button>
           </div>
-          <span>Peso: {calculateWeight(amount)}</span>
+          <span className="pesoInfo">Peso: {calculateWeight(amount)}</span>
           <div className="close" onClick={() => setCloseInfo(false)}>
             <img src={fechar} alt="" />
           </div>
