@@ -8,6 +8,7 @@ import setaEsquerda from "../../assets/images/icons/seta-esquerda.png";
 import fechar from "../../assets/images/icons/botao-fechar.png";
 import { searchContext } from "../../context/searchContext";
 import { categoryContext } from "../../context/categoryContext";
+import { baggageContext } from "../../context/baggageContext";
 
 interface Roupa {
   nome: string;
@@ -21,11 +22,13 @@ interface Tipo {
   peso: number;
 }
 
-interface NavbarBagagemProps {
+interface MenuBagagemProps {
   setItem: React.Dispatch<React.SetStateAction<Object>>;
+  closeInfo: React.Dispatch<React.SetStateAction<any>>;
+  setCloseInfo: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export function MenuBagagem(props: NavbarBagagemProps) {
+export function MenuBagagem(props: MenuBagagemProps) {
   const [data, setData] = useState<Array<any>>([]); //estado para armazenar o array inteiro de categorias
 
   const [amount, setAmount] = useState<number>(0); //estado para armazenar a quantidade de itens selecionados
@@ -37,10 +40,11 @@ export function MenuBagagem(props: NavbarBagagemProps) {
     peso: 0,
     tipos: [],
   });
-  const [closeInfo, setCloseInfo] = useState<boolean>(false);
+  
 
   const search = useContext(searchContext);
   const category = useContext(categoryContext);
+  const closeInfo = useContext(baggageContext)
 
   useEffect(() => {
     //bucando o array de categorias do servidor
@@ -76,7 +80,7 @@ export function MenuBagagem(props: NavbarBagagemProps) {
   const handleCardClick = (item: any) => {
     setSelectedProduct(item);
     setAmount(0);
-    setCloseInfo(true);
+    props.setCloseInfo(true);
   };
 
   //funcao responsavel por calcular o peso do dos itens
@@ -129,7 +133,7 @@ export function MenuBagagem(props: NavbarBagagemProps) {
     };
 
     props.setItem((prevState) => [...prevState, newItem]);
-    setCloseInfo(false);
+    props.setCloseInfo(false);
   };
 
   return (
@@ -179,7 +183,7 @@ export function MenuBagagem(props: NavbarBagagemProps) {
             </button>
           </div>
           <span className="pesoInfo">Peso: {calculateWeight(amount)}</span>
-          <div className="close" onClick={() => setCloseInfo(false)}>
+          <div className="close" onClick={() => props.setCloseInfo(false)}>
             <img src={fechar} alt="" />
           </div>
         </div>

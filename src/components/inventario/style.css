@@ -23,7 +23,7 @@
 .showInventory{
   opacity: 1;
   filter: blur(0);
-  transition: all 2s;
+  transition: all 0.5s;
 }
 
 .hiddenInventory{
@@ -34,7 +34,7 @@
   height: 0;
   top: 50%;
   right: 50%;
-  transition: all 1.5s;
+  transition: all 0.5s;
 }
 
 .inventioCards {
