@@ -3,6 +3,7 @@ import "./style.css";
 import add from "../../assets/images/icons/add.png";
 import sub from "../../assets/images/icons/sub.png";
 import { useState } from "react";
+import Axios from "axios";
 
 export function InventoryCard({ item }) {
   const [selectedProduct, setSelectedProduct] = useState<any>({
@@ -17,7 +18,6 @@ export function InventoryCard({ item }) {
   const [quantity, setQuantity] = useState(item.quantidade);
 
   console.log(item.peso);
-  
 
   const increaseQuantity = () => {
     const newQuantity = quantity + 1;
@@ -42,6 +42,22 @@ export function InventoryCard({ item }) {
       return `${weightG} g`;
     }
   };
+
+  const postItens = () => {
+    Axios.post("http://localhost:5000/bagagem", {
+      nome: item.nome,
+      peso: item.peso,
+      imagem: "imagem.png",
+      quantidade: quantity,
+    });
+  };
+
+  Axios.post("http://localhost:5000/bagagem", {
+    nome: item.nome,
+    peso: item.peso,
+    imagem: "imagem.png",
+    quantidade: quantity,
+  });
 
   return (
     <div onClick={() => setSelectedProduct(item)} className="inventoryCard">

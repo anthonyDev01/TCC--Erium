@@ -1,13 +1,19 @@
 import "./style.css";
-import mala from "../../assets/images/mala.png";
-import { useContext, useState } from "react";
+import malaFechada from "../../assets/images/malaFechada.png";
+import malaAberta from "../../assets/images/mala.png";
+import { useState } from "react";
 import { Inventario } from "../inventario/inventario";
 
 
-export function Bagagem({item}) {
+interface BagagemProps {
+  item: React.Dispatch<React.SetStateAction<any>>;
+  closeInfo: React.Dispatch<React.SetStateAction<any>>;
+
+}
+
+export function Bagagem(props: BagagemProps) {
   const [inventoryClick, setInventoryClick] = useState<Boolean>(false);
 
-  
   const handleClickInventory = () => {
     setInventoryClick(!inventoryClick);
     
@@ -16,9 +22,9 @@ export function Bagagem({item}) {
 
   return (
     <div className="bagagem">
-      <img src={mala} alt="" onClick={handleClickInventory} />
+      <img src={props.closeInfo == true || inventoryClick == true ? malaAberta : malaFechada} alt="" onClick={handleClickInventory} />
 
-      <Inventario item={item} inventoryClick={inventoryClick} setInventoryClick={setInventoryClick}/>
+      <Inventario item={props.item} inventoryClick={inventoryClick} setInventoryClick={setInventoryClick}/>
 
       <div className="ContainerConteudo">
         <p>

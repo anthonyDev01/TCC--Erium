@@ -8,6 +8,7 @@ import setaEsquerda from "../../assets/images/icons/seta-esquerda.png";
 import fechar from "../../assets/images/icons/botao-fechar.png";
 import { searchContext } from "../../context/searchContext";
 import { categoryContext } from "../../context/categoryContext";
+import { baggageContext } from "../../context/baggageContext";
 
 interface Roupa {
   nome: string;
@@ -21,11 +22,14 @@ interface Tipo {
   peso: number;
 }
 
-interface NavbarBagagemProps {
+interface MenuBagagemProps {
   setItem: React.Dispatch<React.SetStateAction<Object>>;
+  itens: Array<any>;
+  closeInfo: React.Dispatch<React.SetStateAction<any>>;
+  setCloseInfo: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export function MenuBagagem(props: NavbarBagagemProps) {
+export function MenuBagagem(props: MenuBagagemProps) {
   const [data, setData] = useState<Array<any>>([]); //estado para armazenar o array inteiro de categorias
 
   const [amount, setAmount] = useState<number>(0); //estado para armazenar a quantidade de itens selecionados
@@ -37,10 +41,10 @@ export function MenuBagagem(props: NavbarBagagemProps) {
     peso: 0,
     tipos: [],
   });
-  const [closeInfo, setCloseInfo] = useState<boolean>(false);
 
   const search = useContext(searchContext);
   const category = useContext(categoryContext);
+  const closeInfo = useContext(baggageContext);
 
   useEffect(() => {
     //bucando o array de categorias do servidor
@@ -76,7 +80,7 @@ export function MenuBagagem(props: NavbarBagagemProps) {
   const handleCardClick = (item: any) => {
     setSelectedProduct(item);
     setAmount(0);
-    setCloseInfo(true);
+    props.setCloseInfo(true);
   };
 
   //funcao responsavel por calcular o peso do dos itens
@@ -120,16 +124,61 @@ export function MenuBagagem(props: NavbarBagagemProps) {
 
   const addItem = () => {
     const type = selectedProduct.tipos;
+    const nome = type ? type[index].nome : selectedProduct.nome;
+    const imagem = `${pathImage}${selectedProduct.imagem}`;
+    const peso = type ? type[index].peso : selectedProduct.peso;
+    const itens = props.itens;
 
-    const newItem = {
-      nome: type ? type[index].nome : selectedProduct.nome,
-      imagem: `${pathImage}${selectedProduct.imagem}`,
-      peso: type ? type[index].peso : selectedProduct.peso,
-      quantidade: amount,
-    };
+    const found = itens.find((item) => {
+      if (item.nome == nome) {
+        return true;
+      }
+    });
 
-    props.setItem((prevState) => [...prevState, newItem]);
-    setCloseInfo(false);
+    if (itens.length == 0) { 
+      const newItem = {
+        nome,
+        imagem,
+        peso,
+        quantidade: amount,
+      };
+
+      props.setItem((prevState) => [...prevState, newItem]);
+      props.setCloseInfo(false);
+    }
+
+    if (itens.length != 0 && !found) {
+      console.log("entro1");
+      const newItem = {
+        nome,
+        imagem,
+        peso,
+        quantidade: amount,
+      };
+
+      props.setItem((prevState) => [...prevState, newItem]);
+      props.setCloseInfo(false);
+    }
+
+    if (itens.length != 0 && found) {
+      console.log("entro2");
+      // Se 'found' for verdadeiro, aumente a quantidade do item existente em 1
+      const updatedItems = itens.map((item) => {
+        if (item.nome === nome) {
+          // Se o nome do item for igual ao 'nome' que você deseja atualizar
+          // Aumente a quantidade em 1
+          return {
+            ...item,
+            quantidade: item.quantidade += amount,
+          };
+        }
+        return item;
+      });
+
+      // Atualize o estado 'itens' com os itens atualizados
+      props.setItem(updatedItems);
+      
+    }
   };
 
   return (
@@ -179,7 +228,7 @@ export function MenuBagagem(props: NavbarBagagemProps) {
             </button>
           </div>
           <span className="pesoInfo">Peso: {calculateWeight(amount)}</span>
-          <div className="close" onClick={() => setCloseInfo(false)}>
+          <div className="close" onClick={() => props.setCloseInfo(false)}>
             <img src={fechar} alt="" />
           </div>
         </div>
