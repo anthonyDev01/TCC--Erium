@@ -12,6 +12,7 @@ import { LoginCadastro } from "./pages/loginCadastro";
 import { Home } from "./pages/Home/home";
 import { BagagemVirtual } from "./pages/bagagemVirtual/bagagemVirtual";
 import { NotFound } from "./components/notFound/notFound";
+import { OpcoesMala } from "./pages/opcoesmala/opcoesMala";
 
 function App() {
   return (
@@ -67,7 +68,10 @@ function AuthChecker() {
         <Route path="" element={<Navigate to="/login" replace />} />
       )}
       {isAuthenticated && (
-        <Route path="/bagagem-virtual" element={<BagagemVirtual />} />
+        <>
+          <Route path="/bagagem-virtual" element={<BagagemVirtual />} />
+          <Route path="/opcoes-mala" element={<OpcoesMala />} />
+        </>
       )}
       <Route path="*" element={<NotFound />} />
     </Routes>

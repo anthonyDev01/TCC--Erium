@@ -90,6 +90,7 @@ export function LoginContainer() {
           </div>
           <div className="loginFormGroup">
             <Field
+              type="password"
               name="senha"
               placeholder="Senha:"
               maxLength="16"

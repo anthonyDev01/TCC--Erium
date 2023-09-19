@@ -100,6 +100,7 @@ export function CadastroContainer() {
           </div>
           <div className="loginFormGroup">
             <Field
+              type="password"
               name="senha"
               placeholder="Senha:"
               maxLength="16"
@@ -113,6 +114,7 @@ export function CadastroContainer() {
           </div>
           <div className="loginFormGroup">
             <Field
+              type="password"
               name="confirmarSenha"
               placeholder="Confirmar Senha:"
               maxLength="16"

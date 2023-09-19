@@ -17,7 +17,7 @@ export function Home() {
         />
 
         <div className="opcoesContainer">
-          <Link className="cardOpcao" to="/bagagem-virtual">
+          <Link className="cardOpcao" to="/opcoes-mala">
             <h2>Arrume sua Mala</h2>
             <img src={malas} alt="ilustracai de uma mala" />
           </Link>

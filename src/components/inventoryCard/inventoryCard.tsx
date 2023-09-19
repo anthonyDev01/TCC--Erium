@@ -44,20 +44,26 @@ export function InventoryCard({ item }) {
   };
 
   const postItens = () => {
-    Axios.post("http://localhost:5000/bagagem", {
-      nome: item.nome,
-      peso: item.peso,
-      imagem: "imagem.png",
-      quantidade: quantity,
-    });
-  };
+    const token = localStorage.getItem("token");
 
   Axios.post("http://localhost:5000/bagagem", {
-    nome: item.nome,
-    peso: item.peso,
-    imagem: "imagem.png",
-    quantidade: quantity,
-  });
+  nome: item.nome,
+  peso: item.peso,
+  imagem: "imagem.png",
+  quantidade: quantity,
+}, {
+  headers: {
+    'Authorization': `Bearer ${token}`,
+  },
+})
+  };
+  
+
+
+
+
+
+
 
   return (
     <div onClick={() => setSelectedProduct(item)} className="inventoryCard">

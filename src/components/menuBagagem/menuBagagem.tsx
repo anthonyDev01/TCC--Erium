@@ -135,7 +135,7 @@ export function MenuBagagem(props: MenuBagagemProps) {
       }
     });
 
-    if (itens.length == 0) { 
+    if (itens.length == 0 && amount != 0) { 
       const newItem = {
         nome,
         imagem,
@@ -147,8 +147,7 @@ export function MenuBagagem(props: MenuBagagemProps) {
       props.setCloseInfo(false);
     }
 
-    if (itens.length != 0 && !found) {
-      console.log("entro1");
+    if (itens.length != 0 && !found && amount != 0) {
       const newItem = {
         nome,
         imagem,
@@ -161,7 +160,6 @@ export function MenuBagagem(props: MenuBagagemProps) {
     }
 
     if (itens.length != 0 && found) {
-      console.log("entro2");
       // Se 'found' for verdadeiro, aumente a quantidade do item existente em 1
       const updatedItems = itens.map((item) => {
         if (item.nome === nome) {
