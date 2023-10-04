@@ -13,6 +13,7 @@ import { Home } from "./pages/Home/home";
 import { BagagemVirtual } from "./pages/bagagemVirtual/bagagemVirtual";
 import { NotFound } from "./components/notFound/notFound";
 import { OpcoesMala } from "./pages/opcoesmala/opcoesMala";
+import { MalasSalvas } from "./pages/malasSalvas/MalasSalvas";
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function AuthChecker() {
         <>
           <Route path="/bagagem-virtual" element={<BagagemVirtual />} />
           <Route path="/opcoes-mala" element={<OpcoesMala />} />
+          <Route path="/malas-salvas" element={<MalasSalvas />} />
         </>
       )}
       <Route path="*" element={<NotFound />} />

@@ -1,0 +1,41 @@
+.fecharOpcaosMala{
+    position: absolute;
+    width: 2.3rem;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.containerOpcaoHome{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #B7D5E5;
+    width: 55%;
+    height: 55%;
+    border-radius: 1rem;
+}
+
+.cardOpcaoHome{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    height: 40%;
+    background-color: #f5fbff;
+    border-radius: 1rem;
+    margin: 3rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cardOpcaoHome h3{
+    margin-bottom: 15%;
+    margin-top: 8%;
+}
+
+.cardOpcaoHome img{
+    width: 40%;
+    
+}

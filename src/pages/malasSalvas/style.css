@@ -1,0 +1,66 @@
+.containerMalasSalvas {
+  width: 50%;
+  height: 50%;
+  background-color: #f9f9f9;
+  border-radius: 50px;
+  padding: 1.8rem;
+  position: relative;
+}
+
+.containerCardsMalaSalva {
+  min-width: 100%;
+  max-height: 88%;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  overflow: scroll;
+  
+  
+}
+
+.containerCardsMalaSalva::-webkit-scrollbar{
+    width: 0;
+}
+
+.cardMalaSalva {
+  background-color: #b7d5e5;
+  width: 47%;
+  height: 30%;
+  border-radius: 25px;
+  display: flex;
+  
+  align-items: center;
+  padding: 1rem;
+  
+}
+
+.cardMalaSalva h4 {
+  margin-bottom: 0.8rem;
+}
+
+.cardMalaSalva h5,
+h4 {
+  color: black;
+  font-weight: bold;
+}
+
+.cardMalaSalva h5 {
+  margin-right: 0.3rem;
+}
+
+.infoMalasSalvas {
+  display: flex;
+  margin-bottom: 0.3rem;
+}
+
+.ImgMalasSalvas {
+  margin-right: 1rem;
+}
+
+.btnMalasSalvas{
+    position: absolute;
+    bottom: 1rem;
+    left: 34%;
+    
+}
+

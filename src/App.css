@@ -33,8 +33,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-
   padding: 3.125rem;
 }
 
@@ -43,7 +41,7 @@
 }
 
 .loginFormGroup {
-  width: 100%;
+  width: 80%;
   margin-bottom: 1.1875rem;
 }
 
@@ -57,7 +55,7 @@
   background-color: #e1e1e1;
   border: none;
   border-radius: 10px;
-
+  padding: 0.7rem;
   width: 100%;
 }
 

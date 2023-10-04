@@ -2,38 +2,53 @@ import homem from "../../assets/images/homem-home.png";
 import mulher from "../../assets/images/mulher-home.png";
 import malas from "../../assets/images/icons/malas.png";
 import passaporte from "../../assets/images/icons/passaporte.png";
+import logo from "../../assets/images/logo-preta.png"
 
 import "./index.css";
 import { Link } from "react-router-dom";
+import { OpcaoHome } from "../../components/opcaoHome/opcaoHome";
+import { useState } from "react";
+import { NavBar } from "../../components/NavBar";
 
 export function Home() {
+  const [closeOpcao, setCloseOpcao] = useState<boolean>(false);
+
+  const handleOpcaoHome = () => {
+    setCloseOpcao(!closeOpcao);
+  };
+
   return (
-    <div className="pageHome">
-      <div className="containerHome">
-        <img
-          className="ilustracaoMain"
-          src={mulher}
-          alt="ilustracao de um homem"
-        />
+    <>
+      <NavBar img={logo} />
+      <div className="pageHome">
+        <div className="containerHome">
+          <img
+            className="ilustracaoMain"
+            src={mulher}
+            alt="ilustracao de um homem"
+          />
 
-        <div className="opcoesContainer">
-          <Link className="cardOpcao" to="/opcoes-mala">
-            <h2>Arrume sua Mala</h2>
-            <img src={malas} alt="ilustracai de uma mala" />
-          </Link>
+          <div className="opcoesContainer">
+            <div className="cardOpcao" onClick={handleOpcaoHome}>
+              <h2>Arrume sua Mala</h2>
+              <img src={malas} alt="ilustracao de uma mala" />
+            </div>
 
-          <Link className="cardOpcao" to="">
-            <h2>Verifique seu Visto</h2>
-            <img src={passaporte} alt="ilustracao de um passaporte" />
-          </Link>
+            {closeOpcao && <OpcaoHome setCloseOpcao={setCloseOpcao} />}
+
+            <Link className="cardOpcao" to="">
+              <h2>Verifique seu Visto</h2>
+              <img src={passaporte} alt="ilustracao de um passaporte" />
+            </Link>
+          </div>
+
+          <img
+            className="ilustracaoMain"
+            src={homem}
+            alt="ilustracao de uma mulher"
+          />
         </div>
-
-        <img
-          className="ilustracaoMain"
-          src={homem}
-          alt="ilustracao de uma mulher"
-        />
       </div>
-    </div>
+    </>
   );
 }

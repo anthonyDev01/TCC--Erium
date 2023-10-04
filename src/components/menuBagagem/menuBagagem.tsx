@@ -64,6 +64,8 @@ export function MenuBagagem(props: MenuBagagemProps) {
       } catch (error) {
         console.error(error);
       }
+      
+
     };
 
     fetchData();
@@ -128,6 +130,7 @@ export function MenuBagagem(props: MenuBagagemProps) {
     const imagem = `${pathImage}${selectedProduct.imagem}`;
     const peso = type ? type[index].peso : selectedProduct.peso;
     const itens = props.itens;
+    
 
     const found = itens.find((item) => {
       if (item.nome == nome) {

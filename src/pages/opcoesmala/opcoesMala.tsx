@@ -1,11 +1,13 @@
 import "../opcoesmala/style.css";
-import minhaImagem from "../../assets/images/suitcase 1.png";
-import minhaImagem2 from "../../assets/images/mala-de-viagem 2.png";
-import minhaImagem3 from "../../assets/images/mochila 1.png";
+import MalaDespachada from "../../assets/images/suitcase 1.png";
+import MaladeMao from "../../assets/images/mala-de-viagem 2.png";
+import ArtigoPessoal from "../../assets/images/mochila 1.png";
 import fechar from "../../assets/images/icons/botao-fechar.png";
+import logo from "../../assets/images/logo-preta.png"
 import { useState } from "react";
 import Axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { NavBar } from "../../components/NavBar";
 
 export function OpcoesMala() {
   const [openName, SetOpenName] = useState<boolean>(false);
@@ -27,6 +29,7 @@ export function OpcoesMala() {
 
   const postMala = () => {
     const token = localStorage.getItem("token");
+    localStorage.setItem("idMala", "");
 
     if (inputValue.length > 0) {
       Axios.post(
@@ -43,92 +46,98 @@ export function OpcoesMala() {
         }
       );
       handleOpenNameSelect();
-      navigate('/bagagem-virtual');
+      navigate("/bagagem-virtual");
     }
   };
 
   return (
-    <div className="Pagina">
-      <h1>Escolha o Tipo de Mala</h1>
+    <>
+    <NavBar img={logo} />
+      <div className="Pagina">
+        <h1>Escolha o Tipo de Mala</h1>
 
-      <div className="conteinerOpcoesMala">
-        <button
-          className={
-            selectedButton == "Mala Despachada"
-              ? "buttonSelected cardOpcoesMala"
-              : "cardOpcoesMala"
-          }
-          onClick={() => handleButtonClick("Mala Despachada")}
-        >
-          <img src={minhaImagem} alt="Texto Alternativo" />
-          <div className="containerConteudoOpcoesMala">
-            <h2> Mala Despachada</h2>
-            <p>
-              {" "}
-              Suporta até 23 kg contando o peso da mala e necessita despachar{" "}
-            </p>
-          </div>
-        </button>
-
-        <button
-          className={
-            selectedButton == "Mala de Mao"
-              ? "buttonSelected cardOpcoesMala"
-              : "cardOpcoesMala"
-          }
-          onClick={() => handleButtonClick("Mala de Mao")}
-        >
-          <img src={minhaImagem2} alt="Texto Alternativo" />
-          <div className="containerConteudoOpcoesMala">
-            <h2> Mala de Mão </h2>
-            <p>
-              {" "}
-              Suporta até 10 kg contando o peso da mala respeitando as dimensões
-              de acordo com a sua pesagem.
-            </p>
-          </div>
-        </button>
-
-        <button
-          className={
-            selectedButton == "Artigo Pessoal"
-              ? "buttonSelected cardOpcoesMala"
-              : "cardOpcoesMala"
-          }
-          onClick={() => handleButtonClick("Artigo Pessoal")}
-        >
-          <img src={minhaImagem3} alt="Texto Alternativo" />
-          <div className="containerConteudoOpcoesMala">
-            <h2> Artigo Pessoal </h2>
-            <p>
-              {" "}
-              Suporta até 10 kg contando o peso da mala respeitando as dimensões
-              de acordo com a sua pesagem.
-            </p>
-          </div>
-        </button>
-
-        <button className="confirmar" onClick={handleOpenNameSelect}>
-          {" "}
-          Confirmar{" "}
-        </button>
-      </div>
-
-      {openName && selectedButton && (
-        <div className="darkBackground">
-          <div className="selecionarNome">
-            <img src={fechar} alt="fechar" onClick={handleOpenNameSelect} />
-            <h2>Insira o nome da sua mala</h2>
-            <div className="nomeInputContainer">
-              <span>nome: </span>
-              <input type="text" onChange={handleInputChange} />
+        <div className="conteinerOpcoesMala">
+          <button
+            className={
+              selectedButton == "Mala Despachada"
+                ? "buttonSelected cardOpcoesMala"
+                : "cardOpcoesMala"
+            }
+            onClick={() => handleButtonClick("Mala Despachada")}
+          >
+            <img src={MalaDespachada} alt="Texto Alternativo" />
+            <div className="containerConteudoOpcoesMala">
+              <h2> Mala Despachada</h2>
+              <p>
+                Suporta até 23 kg contando o peso da mala e necessita despachar
+              </p>
             </div>
-            <button className="buttonContinuar" onClick={postMala}>
-              Continuar
-            </button>
-          </div>
+          </button>
+
+          <button
+            className={
+              selectedButton == "Mala de Mao"
+                ? "buttonSelected cardOpcoesMala"
+                : "cardOpcoesMala"
+            }
+            onClick={() => handleButtonClick("Mala de Mao")}
+          >
+            <img src={MaladeMao} alt="Texto Alternativo" />
+            <div className="containerConteudoOpcoesMala">
+              <h2> Mala de Mão </h2>
+              <p>
+                {" "}
+                Suporta até 10 kg contando o peso da mala respeitando as
+                dimensões de acordo com a sua pesagem.
+              </p>
+            </div>
+          </button>
+
+          <button
+            className={
+              selectedButton == "Artigo Pessoal"
+                ? "buttonSelected cardOpcoesMala"
+                : "cardOpcoesMala"
+            }
+            onClick={() => handleButtonClick("Artigo Pessoal")}
+          >
+            <img src={ArtigoPessoal} alt="Texto Alternativo" />
+            <div className="containerConteudoOpcoesMala">
+              <h2> Artigo Pessoal </h2>
+              <p>
+                {" "}
+                Suporta até 10 kg contando o peso da mala respeitando as
+                dimensões de acordo com a sua pesagem.
+              </p>
+            </div>
+          </button>
+
+          <button className="confirmar" onClick={handleOpenNameSelect}>
+            {" "}
+            Confirmar{" "}
+          </button>
         </div>
-      )}
-    </div>
+
+        {openName && selectedButton && (
+          <div className="darkBackground">
+            <div className="selecionarNome">
+              <img src={fechar} alt="fechar" onClick={handleOpenNameSelect} />
+              <h2>Insira o nome da sua mala</h2>
+              <div className="nomeInputContainer">
+                <span>nome: </span>
+                <input
+                  maxLength={20}
+                  type="text"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <button className="buttonContinuar" onClick={postMala}>
+                Continuar
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
