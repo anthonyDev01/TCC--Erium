@@ -18,11 +18,9 @@
 }
 
 .cardOpcaoHome{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25%;
-    height: 40%;
+    
+    width: 30%;
+    height: 50%;
     background-color: #f5fbff;
     border-radius: 1rem;
     margin: 3rem;
@@ -30,7 +28,15 @@
     text-decoration: none;
 }
 
-.cardOpcaoHome h3{
+.cardOpcaoHome .cardOpcaoHomeLink{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cardOpcaoHome  h3{
     margin-bottom: 15%;
     margin-top: 8%;
 }

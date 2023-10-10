@@ -1,39 +1,49 @@
 import "./style.css";
 import malaFechada from "../../assets/images/malaFechada.png";
 import malaAberta from "../../assets/images/mala.png";
+import happySuitCase from "../../assets/images/happySuitCase.png";
+
 import { useState } from "react";
 import { Inventario } from "../inventario/inventario";
 import Axios from "axios";
+import { PopupSave } from "../popupSave/popupSave";
+import { motion, AnimatePresence } from "framer-motion";
+
+interface Item {
+  nome: string;
+  peso: number;
+  imagem: string;
+  quantidade: number;
+}
 
 interface BagagemProps {
-  item: React.Dispatch<React.SetStateAction<any>>;
+  item: Item[];
   closeInfo: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export function Bagagem(props: BagagemProps) {
   const [inventoryClick, setInventoryClick] = useState<Boolean>(false);
+  const [popupOpen, setPopupOpen] = useState<Boolean>(false);
 
   const handleClickInventory = () => {
     setInventoryClick(!inventoryClick);
+  };
+
+  const handleClickPopup = () => {
+    setPopupOpen(!popupOpen);
   };
 
   const postItens = async () => {
     const itens = props.item;
     const token = localStorage.getItem("token");
     const idMala = localStorage.getItem("idMala");
-    console.log(itens);
-
-    for (let item of itens) {
-      console.log(item.nome);
-
+    if (itens.length > 0) {
       try {
         await Axios.post(
           `http://localhost:5000/bagagem?id=${idMala}`,
           {
-            nome: item.nome,
-            peso: item.peso,
-            imagem: item.imagem,
-            quantidade: item.quantidade,
+            idMala: idMala,
+            itens: itens,
           },
           {
             headers: {
@@ -41,11 +51,41 @@ export function Bagagem(props: BagagemProps) {
             },
           }
         );
+        setInventoryClick(false);
+        handleClickPopup();
       } catch (error) {
-        console.error("Erro ao salvar item:", error);
+        console.error("Erro ao salvar itens:", error);
       }
     }
-    console.log("Todos os itens foram salvos com sucesso.");
+  };
+
+  const getPeso = () => {
+    const itens = props.item;
+    const umKilo = 1000;
+    let peso = 0;
+
+    for (let item of itens) {
+      peso += item.peso * item.quantidade;
+    }
+
+    if (peso >= umKilo) {
+      const pesoKg = (peso / umKilo).toFixed(1);
+      return `${pesoKg} kg`;
+    } else {
+      const pesoG = peso.toFixed(1);
+      return `${pesoG} g`;
+    }
+  };
+
+  const getQuantidade = () => {
+    const itens = props.item;
+    let quantidade = 0;
+
+    for (let item of itens) {
+      quantidade += item.quantidade;
+    }
+
+    return quantidade;
   };
 
   return (
@@ -69,10 +109,10 @@ export function Bagagem(props: BagagemProps) {
       <div className="ContainerConteudo">
         <div className="pesoItem">
           <p>
-            Peso Aproximado: <span className="peso">16kg </span>
+            Peso Aproximado: <span className="peso">{getPeso()}</span>
           </p>
           <p>
-            Itens: <span>30</span>
+            Itens: <span>{getQuantidade()}</span>
           </p>
         </div>
         <button className="btnSalvar" onClick={postItens}>
@@ -80,6 +120,12 @@ export function Bagagem(props: BagagemProps) {
           Salvar
         </button>
       </div>
+
+      <AnimatePresence>
+        {popupOpen && (
+          <PopupSave setPopupOpen={setPopupOpen} popupOpen={popupOpen} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

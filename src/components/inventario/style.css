@@ -11,13 +11,15 @@
   right: 20%;
 
   display: flex;
-
   justify-content: center;
-
   flex-wrap: wrap;
 
-  padding: 20px;
+  padding: 1rem 5rem;
   overflow: auto;
+}
+
+.inventario::-webkit-scrollbar{
+  width: 0;
 }
 
 .showInventory{

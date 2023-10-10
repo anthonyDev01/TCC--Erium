@@ -15,7 +15,8 @@
 }
 
 .inventoryCard h4 {
-  font-size: clamp(0.6rem, 0.5rem + 1vw, 0.9rem);
+  font-size: clamp(0.6rem, 0.5rem + 0.2vw, 0.9rem);
+  text-align: center;
 }
 
 .inventoryCard img {

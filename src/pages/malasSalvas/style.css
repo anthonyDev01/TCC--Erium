@@ -1,5 +1,5 @@
 .containerMalasSalvas {
-  width: 50%;
+  width: 65%;
   height: 50%;
   background-color: #f9f9f9;
   border-radius: 50px;
@@ -36,6 +36,8 @@
 
 .cardMalaSalva h4 {
   margin-bottom: 0.8rem;
+  font-size: clamp(0.8rem, 1.6vw, 1.2rem);
+  text-align: center;
 }
 
 .cardMalaSalva h5,
@@ -46,15 +48,23 @@ h4 {
 
 .cardMalaSalva h5 {
   margin-right: 0.3rem;
+  font-size: clamp(0.68rem, 0.5vw, 1.5rem);
 }
 
 .infoMalasSalvas {
   display: flex;
+  align-items: center;
   margin-bottom: 0.3rem;
 }
 
+.infoMalasSalvas span{
+  font-size: clamp(0.6rem, 0.2em + 0.5vw, 2rem);
+}
+
+
 .ImgMalasSalvas {
   margin-right: 1rem;
+  width: 30%;
 }
 
 .btnMalasSalvas{

@@ -3,11 +3,12 @@ import MalaDespachada from "../../assets/images/suitcase 1.png";
 import MaladeMao from "../../assets/images/mala-de-viagem 2.png";
 import ArtigoPessoal from "../../assets/images/mochila 1.png";
 import fechar from "../../assets/images/icons/botao-fechar.png";
-import logo from "../../assets/images/logo-preta.png"
+import logo from "../../assets/images/logo-preta.png";
 import { useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { NavBar } from "../../components/NavBar";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function OpcoesMala() {
   const [openName, SetOpenName] = useState<boolean>(false);
@@ -52,7 +53,7 @@ export function OpcoesMala() {
 
   return (
     <>
-    <NavBar img={logo} />
+      <NavBar img={logo} />
       <div className="Pagina">
         <h1>Escolha o Tipo de Mala</h1>
 
@@ -117,26 +118,37 @@ export function OpcoesMala() {
             Confirmar{" "}
           </button>
         </div>
-
-        {openName && selectedButton && (
-          <div className="darkBackground">
-            <div className="selecionarNome">
-              <img src={fechar} alt="fechar" onClick={handleOpenNameSelect} />
-              <h2>Insira o nome da sua mala</h2>
-              <div className="nomeInputContainer">
-                <span>nome: </span>
-                <input
-                  maxLength={20}
-                  type="text"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <button className="buttonContinuar" onClick={postMala}>
-                Continuar
-              </button>
+        <AnimatePresence>
+          {openName && selectedButton && (
+            <div className="darkBackground">
+              <motion.div
+                className="selecionarNome"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
+                transition={{ duration: 0.5 }}
+              >
+                <img src={fechar} alt="fechar" onClick={handleOpenNameSelect} />
+                <h2>Insira o nome da sua mala</h2>
+                <div className="nomeInputContainer">
+                  <span>nome: </span>
+                  <input
+                    maxLength={20}
+                    type="text"
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <motion.button
+                  className="buttonContinuar"
+                  onClick={postMala}
+                  whileHover={{ scale: 1.1 }}
+                >
+                  Continuar
+                </motion.button>
+              </motion.div>
             </div>
-          </div>
-        )}
+          )}
+        </AnimatePresence>
       </div>
     </>
   );

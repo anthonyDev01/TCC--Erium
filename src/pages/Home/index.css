@@ -45,4 +45,6 @@
 .cardOpcao h2 {
   font-weight: bold;
   margin-bottom: 1rem;
+  text-align: center;
+  font-size: clamp(1rem, 0.3rem + 1vw, 2rem);
 }

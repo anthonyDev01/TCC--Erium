@@ -1,0 +1,94 @@
+.popupsSave {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #afc4f9;
+  padding: 2rem;
+  border-radius: 10px;
+  animation: slide-in 300ms ease-in-out;
+}
+
+.popupsSave img {
+  width: 60%;
+}
+
+.popupsSaveBackground {
+  position: absolute;
+  right: 0;
+  width: 100vw;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popupsSave button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #4275fa;
+  border: none;
+  text-align: center;
+  font-size: 17px;
+  padding: 0.8rem;
+  width: 30%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.popupsSave button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  color: #ffffff;
+}
+
+.popupsSave button span:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -15px;
+  transition: 0.5s;
+}
+
+.popupsSave button:hover span {
+  padding-right: 15px;
+}
+
+.popupsSave button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/* Animação de entrada do PopupSave */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
+.popup-enter {
+  opacity: 0;
+  transform: translateY(-2rem);
+}
+
+/* Classe para a animação de saída do PopupSave */
+.popup-exit {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.popup-exit-active {
+  opacity: 0;
+  transform: translateY(-2rem);
+  transition: opacity 300ms, transform 300ms;
+}

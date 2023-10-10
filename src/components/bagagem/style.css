@@ -8,9 +8,9 @@
   justify-content: flex-end;
 }
 
-.bagagem img{
-    width: 70%;
-    cursor: pointer;
+.bagagem img {
+  width: 70%;
+  cursor: pointer;
 }
 
 .ContainerConteudo {
@@ -22,12 +22,11 @@
   font-weight: bold;
 }
 
-.pesoItem{
+.pesoItem {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
-
 }
 
 .btnSalvar {
@@ -36,9 +35,11 @@
   outline: 0;
   border: 0;
   cursor: pointer;
-  will-change: box-shadow,transform;
+  will-change: box-shadow, transform;
   background: #7d9ff6;
-  box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+  box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%),
+    0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%),
+    inset 0px -0.01em 0px rgb(58 65 111 / 50%);
   padding: 0 2em;
   border-radius: 0.3em;
   color: #fff;
@@ -49,7 +50,8 @@
 }
 
 .btnSalvar:hover {
-  box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+  box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%),
+    0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
   transform: translateY(-0.1em);
 }
 
