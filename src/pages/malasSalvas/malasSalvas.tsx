@@ -11,7 +11,7 @@ import { NavBar } from "../../components/NavBar";
 export const MalasSalvas = () => {
   const [data, setData] = useState<Array<any>>([]);
   const [selectId, SetSelectId] = useState<string>("");
-  const [selectedButton, setSelectedButton] = useState<string>("");
+  const [pressedCard, setPressedCard] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,9 +49,12 @@ export const MalasSalvas = () => {
     goToBagagemVirtual();
   };
 
-  const handleButtonClick = (buttonName: string, selectedId: string) => {
-    setSelectedButton(buttonName);
-    SetSelectId(selectedId);
+  const handleClickCard = (idBagagem) => {
+    if (idBagagem == pressedCard) {
+      setPressedCard(null);
+    } else {
+      setPressedCard(idBagagem);
+    }
   };
 
   return (
@@ -64,9 +67,14 @@ export const MalasSalvas = () => {
           <div className="containerCardsMalaSalva">
             {data.map((mala) => (
               <div
-                onClick={() => SetSelectId(mala.idBagagem)}
+                onClick={() => {
+                  SetSelectId(mala.idBagagem);
+                  handleClickCard(mala.idBagagem);
+                }}
                 key={mala.idBagagem}
-                className="cardMalaSalva"
+                className={`cardMalaSalva ${
+                  pressedCard == mala.idBagagem ? "pressedCardMala" : ""
+                }`}
               >
                 <img
                   className="ImgMalasSalvas"
@@ -74,14 +82,14 @@ export const MalasSalvas = () => {
                   alt=""
                 />
                 <div className="conteudocardMalaSalva">
-                  <h4>{mala.tipoBagagem}</h4>
+                  <h4>{mala.nomeBagagem}</h4>
                   <div className="infoMalasSalvas">
-                    <h5>Nome da mala: </h5>
-                    <span>{mala.nomeBagagem}</span>
+                    <h5>Tipo da mala: </h5>
+                    <span>{mala.tipoBagagem}</span>
                   </div>
                   <div className="infoMalasSalvas">
                     <h5>Qtd de Itens: </h5>
-                    <span>0</span>
+                    <span>{mala.qtdItens}</span>
                   </div>
                   <div className="infoMalasSalvas">
                     <h5>Peso: </h5>

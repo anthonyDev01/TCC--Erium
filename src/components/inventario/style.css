@@ -7,8 +7,8 @@
   border-radius: 12px;
   z-index: 100;
 
-  top: 15%;
-  right: 20%;
+  top: 10%;
+  right: -110%;
 
   display: flex;
   justify-content: center;

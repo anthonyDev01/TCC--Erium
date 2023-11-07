@@ -34,11 +34,12 @@ export function OpcoesMala() {
 
     if (inputValue.length > 0) {
       Axios.post(
-        "http://localhost:5000/malaUsuario",
+        "http://localhost:5000/mala-nova",
         {
           nome: inputValue,
           tipo: selectedButton,
           peso: 0,
+          quantidade: 0,
         },
         {
           headers: {
@@ -69,9 +70,7 @@ export function OpcoesMala() {
             <img src={MalaDespachada} alt="Texto Alternativo" />
             <div className="containerConteudoOpcoesMala">
               <h2> Mala Despachada</h2>
-              <p>
-                Suporta até 23 kg contando o peso da mala e necessita despachar
-              </p>
+              <p>Suporta até 23 kg e deve ser despachada.</p>
             </div>
           </button>
 
@@ -86,11 +85,7 @@ export function OpcoesMala() {
             <img src={MaladeMao} alt="Texto Alternativo" />
             <div className="containerConteudoOpcoesMala">
               <h2> Mala de Mão </h2>
-              <p>
-                {" "}
-                Suporta até 10 kg contando o peso da mala respeitando as
-                dimensões de acordo com a sua pesagem.
-              </p>
+              <p> Suporta até 10 kg, contando com o peso da mala</p>
             </div>
           </button>
 

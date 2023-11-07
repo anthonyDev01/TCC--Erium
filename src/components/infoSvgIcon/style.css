@@ -1,0 +1,27 @@
+.imgInfoIcon{
+    position: absolute;
+    top: -20%;
+    right: 0;
+    cursor: pointer;
+    
+}
+
+.imgInfoIcon:hover{
+    transform: scale(1.1) ;
+}
+
+
+.ultrapassou{
+    animation: moveUpDown 0.9s linear infinite; /
+}
+
+
+  
+@keyframes moveUpDown {
+    0%, 100% {
+        transform: scale(1); /* A posição inicial e final é a mesma */
+    }
+    50% {
+        transform: scale(1.2); /* Move para cima */
+    }
+  }

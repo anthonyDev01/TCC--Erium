@@ -34,6 +34,7 @@ export function MenuBagagem(props: MenuBagagemProps) {
 
   const [amount, setAmount] = useState<number>(0); //estado para armazenar a quantidade de itens selecionados
   const [index, setIndex] = useState<number>(0); //estado para armazenar o index do array de tipos dos itens
+  const [savedData, setSavedData] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState<any>({
     //estado onde vai ser armazenado o item clicado
     nome: "",
@@ -47,11 +48,12 @@ export function MenuBagagem(props: MenuBagagemProps) {
   const closeInfo = useContext(baggageContext);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("idMala");
+
     //bucando o array de categorias do servidor
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("token");
-
         const response = await Axios.get(
           "http://localhost:5000/pagina-protegida",
           {
@@ -64,10 +66,19 @@ export function MenuBagagem(props: MenuBagagemProps) {
       } catch (error) {
         console.error(error);
       }
-      
-
     };
 
+    const fetchItensSalvo = async () => {
+      await Axios.get(`http://localhost:5000/bagagem?id=${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((response) => {
+        setSavedData(response.data);
+      });
+    };
+
+    fetchItensSalvo();
     fetchData();
   }, []);
 
@@ -129,16 +140,19 @@ export function MenuBagagem(props: MenuBagagemProps) {
     const nome = type ? type[index].nome : selectedProduct.nome;
     const imagem = `${pathImage}${selectedProduct.imagem}`;
     const peso = type ? type[index].peso : selectedProduct.peso;
-    const itens = props.itens;
+    const allItens = [...props.itens, ...savedData];
+    const itens = [...props.itens, ...savedData];
+
+    console.log(allItens);
     
 
-    const found = itens.find((item) => {
+    const found = allItens.find((item) => {
       if (item.nome == nome) {
         return true;
       }
     });
 
-    if (itens.length == 0 && amount != 0) { 
+    if (itens.length == 0 && amount != 0) {
       const newItem = {
         nome,
         imagem,
@@ -162,24 +176,6 @@ export function MenuBagagem(props: MenuBagagemProps) {
       props.setCloseInfo(false);
     }
 
-    if (itens.length != 0 && found) {
-      // Se 'found' for verdadeiro, aumente a quantidade do item existente em 1
-      const updatedItems = itens.map((item) => {
-        if (item.nome === nome) {
-          // Se o nome do item for igual ao 'nome' que você deseja atualizar
-          // Aumente a quantidade em 1
-          return {
-            ...item,
-            quantidade: item.quantidade += amount,
-          };
-        }
-        return item;
-      });
-
-      // Atualize o estado 'itens' com os itens atualizados
-      props.setItem(updatedItems);
-      
-    }
   };
 
   return (

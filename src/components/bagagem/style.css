@@ -6,10 +6,21 @@
   align-items: center;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
+}
+
+.malaIconContainer {
+  position: relative;
+  width: 74%;
+}
+
+.malaIcon {
+  width: 96%;
+  cursor: pointer;
 }
 
 .bagagem img {
-  width: 70%;
+  width: 96%;
   cursor: pointer;
 }
 
@@ -64,6 +75,24 @@
   color: #000;
 }
 
-.peso {
+.verde {
   color: #3b7600;
+}
+
+.amarelo {
+  color: #ceba00;
+}
+
+.vermelho {
+  color: #ff0a0a;
+  animation: moveUpDown 0.3s linear infinite; /
+}
+
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: scaleY(0); 
+  }
+  50% {
+    transform: scaleY(60px); 
+  }
 }

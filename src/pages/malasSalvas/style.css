@@ -14,12 +14,10 @@
   gap: 1rem;
   flex-wrap: wrap;
   overflow: scroll;
-  
-  
 }
 
-.containerCardsMalaSalva::-webkit-scrollbar{
-    width: 0;
+.containerCardsMalaSalva::-webkit-scrollbar {
+  width: 0;
 }
 
 .cardMalaSalva {
@@ -28,10 +26,10 @@
   height: 30%;
   border-radius: 25px;
   display: flex;
-  
+
   align-items: center;
   padding: 1rem;
-  
+  cursor: pointer;
 }
 
 .cardMalaSalva h4 {
@@ -57,20 +55,23 @@ h4 {
   margin-bottom: 0.3rem;
 }
 
-.infoMalasSalvas span{
+.infoMalasSalvas span {
   font-size: clamp(0.6rem, 0.2em + 0.5vw, 2rem);
 }
-
 
 .ImgMalasSalvas {
   margin-right: 1rem;
   width: 30%;
 }
 
-.btnMalasSalvas{
-    position: absolute;
-    bottom: 1rem;
-    left: 34%;
-    
+.btnMalasSalvas {
+  position: absolute;
+  bottom: 1rem;
+  left: 34%;
 }
 
+.pressedCardMala {
+  width: 46.9%;
+  height: 27%;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+}

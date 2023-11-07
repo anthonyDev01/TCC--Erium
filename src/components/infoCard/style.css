@@ -1,0 +1,54 @@
+.infoCard {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 10%;
+  width: 80%;
+  height: 60%;
+  border-radius: 30px;
+  border: 1px solid black;
+  opacity: 0.96;
+}
+
+.infoCard img {
+  width: 30%;
+}
+
+.infoCard p {
+  max-width: 75%;
+  margin-top: 8%;
+}
+
+.closeInfoCard{
+    width: 9%;
+    height: 9%;
+    position: absolute;
+    top: -3%;
+    right: -3%;
+    background-color: #ff0a0a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.closeInfoCard img{
+    width: 90%;
+}
+
+
+
+.cardOk {
+  background-color: #70F46D;
+}
+
+.cardAlerta {
+  background-color: #FFFA86;
+}
+
+.cardUltrapassou {
+  background-color: #FF8686;
+}

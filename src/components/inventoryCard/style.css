@@ -53,6 +53,7 @@
   height: 1.9vh;
   border-radius: 50%;
   border: none;
+  margin: 0 4px;
 
   display: flex;
   align-items: center;

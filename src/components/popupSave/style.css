@@ -14,7 +14,7 @@
 
 .popupsSaveBackground {
   position: absolute;
-  right: 0;
+  right: -170%;
   width: 100vw;
   height: 100%;
 

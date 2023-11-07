@@ -40,7 +40,7 @@ export function Home() {
             </AnimatePresence>
 
             <Link className="cardOpcao" to="">
-              <h2>Verifique seu Visto</h2>
+              <h2>Planege sua Viagem</h2>
               <img src={passaporte} alt="ilustracao de um passaporte" />
             </Link>
           </div>
